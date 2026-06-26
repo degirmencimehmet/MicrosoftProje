@@ -1,0 +1,8 @@
+dataset/
+yolo_dataset/
+yolo_dataset_small/
+runs/
+*.pt
+__pycache__/
+*.pyc
+.DS_Store
