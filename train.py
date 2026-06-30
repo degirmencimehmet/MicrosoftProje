@@ -12,5 +12,5 @@ model.train(
     name="uav_detector",
     patience=10,
     save_period=5,
-    val=True,
+    val=True,  # val aslında validation dosyasını kullanacak mı kullanmayacak mı 
 )

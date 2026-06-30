@@ -1,8 +1,5 @@
 import numpy as np
-from kalman import predict
 from scipy.optimize import linear_sum_assignment
-
-
 
 
 def buildCostMatrix(trackers, detections):
