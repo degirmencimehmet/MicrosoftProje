@@ -386,6 +386,12 @@ summary = evaluate(tracker, model, sequences, conf=0.3)
 - **FPS** → saniyede kaç frame
 
 ---
+## Demo video
+
+
+https://github.com/user-attachments/assets/c00101f3-16ff-4445-bd67-b056b9e8b7e4
+
+
 
 ## Sonuçlar
 
