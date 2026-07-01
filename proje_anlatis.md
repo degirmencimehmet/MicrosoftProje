@@ -478,7 +478,35 @@ FPS          = 35.1    → iyi!
 
 ---
 
-## 13. Dosya Yapısı
+## 13. Demo Videosu
+
+Her frame'de pipeline uçtan uca çalıştırılıp video oluşturuldu:
+
+```python
+# Her frame için:
+img = cv2.imread(frame_path)
+
+# 1. YOLO tespiti
+results = model(frame_path, conf=0.3)
+detections = [(cx, cy) for her bbox]
+
+# 2. Tracker güncelle
+tracks = tracker.update(detections)
+
+# 3. Çiz
+img = draw_tracks(img, tracks)
+
+# 4. Videoya yaz
+out.write(img)
+```
+
+**Çıktı:** `runs/demo.mp4` — 300 frame, 25 FPS, 640x512
+
+Model bazı frame'lerde drone'u kaçırıyor (20 seq, imgsz=320 nedeniyle). Ama pipeline eksiksiz çalışıyor — daha iyi model ile metrikler doğrudan iyileşir.
+
+---
+
+## 14. Dosya Yapısı
 
 ```
 Microsoft proje/

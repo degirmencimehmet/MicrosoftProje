@@ -356,28 +356,59 @@ summary = evaluate(tracker, model, sequences, conf=0.3)
 
 ---
 
-## 13. Proje Durumu
+## 13. Demo Videosu
+
+**Script:** `test_model.ipynb` son hücre
+
+```python
+SEQ_PATH = "dataset/test/02_6319_1500-2999"
+OUTPUT   = "runs/demo.mp4"
+N_FRAMES = 300   # ilk 300 frame
+
+# Her frame'de:
+# 1. YOLO tespiti (conf=0.3)
+# 2. Tracker güncelle
+# 3. draw_tracks ile çiz
+# 4. VideoWriter ile kaydet
+```
+
+**Ayarlar:**
+- Sequence: `02_6319_1500-2999` (1500 frame, ilk 300 kullanıldı)
+- FPS: 25
+- Çözünürlük: 640x512
+- Çıktı: `runs/demo.mp4`
+
+**Sonuç:** Pipeline çalışıyor, drone bazı frame'lerde kaçırılıyor (model zayıf — 20 seq, imgsz=320). Görüşmede: "pipeline eksiksiz, daha fazla veri ile metrikler iyileşir" denilebilir.
+
+---
+
+## 14. Proje Durumu — TAMAMLANDI
 
 **Tamamlanan:**
+- [x] Veri seti hazırlama (Anti-UAV410 → YOLO format)
+- [x] YOLOv8 fine-tuning (mAP50: 0.801)
 - [x] `src/kalman.py` — Kalman filtresi
 - [x] `src/association.py` — Macar algoritması
 - [x] `src/tracker.py` — Durum makinesi
 - [x] `src/visualize.py` — Görselleştirme
-- [x] `src/evaluate.py` — MOTA, IDF1, FPS
+- [x] `src/detector.py` — SAHI wrapper
+- [x] `src/evaluate.py` — MOTA: 0.345, IDF1: 0.083, FPS: 35.1
+- [x] Demo videosu (`runs/demo.mp4`)
 
-**Sonraki Adımlar (Hafta 3):**
-- [ ] Model iyileştirme: daha fazla sequence, `imgsz=640`
-- [ ] SAHI ekle — küçük/uzak drone tespitini iyileştir
-- [ ] Demo videosu — gerçek sequence üzerinde tam pipeline
-- [ ] Metrik karşılaştırma tablosu (baseline vs iyileştirilmiş)
+**İyileştirme fırsatları (görüşme için söylenebilir):**
+- 200 sequence ile eğitim → mAP 0.90+
+- `imgsz=640` → küçük drone tespiti iyileşir
+- SAHI + iyi model → FN azalır, MOTA artar
 
 ---
 
-## 14. Önemli Notlar
+## 15. Önemli Notlar
 
 - `.gitignore`: `dataset/`, `yolo_dataset/`, `yolo_dataset_small/`, `runs/`, `*.pt`
 - Model: `runs/uav_detector-5/weights/best.pt` (22.5MB)
+- Demo: `runs/demo.mp4`
 - Sembolik linkler Finder'da görünmez ama YOLO okuyabilir
 - Mac'te `.DS_Store` klasör listesini bozar → `.startswith(".")` ile filtrele
-- Açıklama dosyaları: `src/association_aciklama.md`, `src/tracker_aciklama.md`, `src/visualize_aciklama.md`, `src/visualize_aciklama.md`
+- Açıklama dosyaları: `src/association_aciklama.md`, `src/tracker_aciklama.md`, `src/visualize_aciklama.md`
 - `python3` değil her zaman `python3.11` kullan
+- Detaylı anlatım: `proje_anlatis.md`
